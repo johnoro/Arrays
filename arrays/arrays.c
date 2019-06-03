@@ -19,7 +19,7 @@ typedef struct Array {
 /*****
  * Allocate memory for a new array
  *****/
-Array *create_array (unsigned capacity) {
+Array *create_array(unsigned capacity) {
   // Allocate memory for the Array struct
   Array *arr = malloc(sizeof(Array));
 
@@ -137,24 +137,25 @@ void arr_append(Array *arr, char *element) {
  * Throw an error if the value is not found.
  *****/
 void arr_remove(Array *arr, char *element) {
-  int found = -1;
+  int found = 0;
+  size_t i = 0;
   // Search for the first occurence of the element and remove it.
   // Don't forget to free its memory!
-  for (size_t i = 0; i < arr->count; i++) {
+  while (!found && i < arr->count) {
     if (strcmp(arr->elements[i], element) == 0) {
-      found = i;
+      found = 1;
       free(arr->elements[i]);
-    }
+    } else i++;
   }
 
-  if (found == -1) {
+  if (!found) {
     perror("Element not found");
     return;
   }
 
   // Shift over every element after the removed element to the left one position
-  for (size_t i = found+1; i < arr->count; i++)
-    arr->elements[i-1] = arr->elements[i];
+  for (size_t j = i+1; j < arr->count; j++)
+    arr->elements[j-1] = arr->elements[j];
 
   // Decrement count by 1
   arr->count--;

@@ -7,7 +7,7 @@ typedef struct Array {
   char **elements;
 } Array;
 
-Array *create_array (unsigned capacity);
+Array *create_array(unsigned capacity);
 
 void destroy_array(Array *arr);
 
