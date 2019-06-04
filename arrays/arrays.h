@@ -19,4 +19,22 @@ void arr_insert(Array *arr, char *element, unsigned index);
 
 void arr_remove(Array *arr, char *element);
 
+/* Stretch array declarations */
+
+void arr_clear(Array *arr);
+
+Array *arr_copy(Array *arr);
+
+void arr_extend(Array *arr);
+
+unsigned arr_index(Array *arr);
+
+char *arr_pop(Array *arr);
+
+void arr_reverse(Array *arr);
+
+void arr_sort(Array *arr);
+// void arr_sort(Array *arr, cmp_func, reverse?);
+
+
 #endif

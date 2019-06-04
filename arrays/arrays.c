@@ -161,6 +161,11 @@ void arr_remove(Array *arr, char *element) {
   arr->count--;
 }
 
+void arr_clear(Array *arr) {
+  for (size_t i = 0; i < arr->count; i++)
+    free(arr->elements[i]);
+  arr->count = 0;
+}
 
 /*****
  * Utility function to print an array.
