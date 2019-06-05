@@ -177,7 +177,10 @@ void arr_clear(Array *arr) {
 }
 
 Array *arr_copy(Array *arr) {
-  return arr;
+  Array *cpy_arr = create_array(arr->capacity);
+  for (size_t i = 0; i < arr->count; i++)
+    arr_append(cpy_arr, arr->elements[i]);
+  return cpy_arr;
 }
 
 void arr_extend(Array *arr, Array *extension_arr) {
