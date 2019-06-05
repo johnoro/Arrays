@@ -161,10 +161,43 @@ void arr_remove(Array *arr, char *element) {
   arr->count--;
 }
 
+/************************************
+ *
+ *   STRETCH ARRAY FUNCTIONS
+ *   Check out
+ *   https://www.programiz.com/python-programming/methods/list
+ *   for reference.
+ *
+ ************************************/
+
 void arr_clear(Array *arr) {
   for (size_t i = 0; i < arr->count; i++)
     free(arr->elements[i]);
   arr->count = 0;
+}
+
+Array *arr_copy(Array *arr) {
+  return arr;
+}
+
+void arr_extend(Array *arr, Array *extension_arr) {
+  return;
+}
+
+unsigned arr_index(Array *arr, unsigned index) {
+  return 0;
+}
+
+char *arr_pop(Array *arr, int index) {
+  return NULL;
+}
+
+void arr_reverse(Array *arr) {
+  return;
+}
+
+void arr_sort(Array *arr) {
+  return;
 }
 
 /*****
