@@ -188,8 +188,17 @@ void arr_extend(Array *arr, Array *extension_arr) {
     arr_append(arr, extension_arr->elements[i]);
 }
 
-unsigned arr_index(Array *arr, unsigned index) {
-  return 0;
+unsigned arr_index(Array *arr, char *element) {
+  int found = 0;
+  size_t i = 0;
+  while (!found && i < arr->count) {
+    if (strcmp(arr->elements[i], element) == 0) {
+      found = 1;
+      break;
+    }
+    i++;
+  }
+  return found ? i : -1;
 }
 
 char *arr_pop(Array *arr, int index) {

@@ -57,7 +57,6 @@ char *day_2_array_tests() {
 
   mu_assert(strcmp(arr_read(arr, 0), "VALUE-2") == 0, "Remove value failed");
   mu_assert(strcmp(arr_read(arr, 1), "VALUE-1") == 0, "Remove value failed");
-  arr_print(arr);
   mu_assert(arr_read(arr, 2) == NULL, "Remove value failed");
 
   destroy_array(arr);
@@ -100,9 +99,9 @@ char *stretch_array_tests() {
   destroy_array(cpy_arr);
 
   /* INDEX */
-  mu_assert(arr_index(arr, "VALUE-4") == 1, "Index did not find first matching element correctly.");
+  mu_assert(arr_index(arr, "VALUE-3") == 0, "Index did not find first matching element correctly.");
   arr_remove(arr, "VALUE-3");
-  mu_assert(arr_index(arr, "VALUE-3") == 1, "Index did not find matching element correctly.");
+  mu_assert(arr_index(arr, "VALUE-4") == 1, "Index did not find matching element correctly.");
   mu_assert(arr_index(arr, "VALUE-1001") == -1, "Index did not return -1 for non-existing element.");
 
   /* POP */
