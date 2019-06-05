@@ -81,7 +81,7 @@ char *stretch_array_tests() {
   mu_assert(strcmp(arr_read(arr, 0), "VALUE-3") == 0, "Append after clear failed.");
 
   /* COPY */
-  Array *cpy_arr = array_copy(arr);
+  Array *cpy_arr = arr_copy(arr);
 
   mu_assert(strcmp(arr_read(arr, 0), arr_read(cpy_arr, 0)) == 0, "Copied arr's first element did not match.");
   mu_assert(arr->capacity == cpy_arr->capacity, "Copied capacity did not match.");
