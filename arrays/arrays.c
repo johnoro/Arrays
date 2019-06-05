@@ -184,7 +184,8 @@ Array *arr_copy(Array *arr) {
 }
 
 void arr_extend(Array *arr, Array *extension_arr) {
-  return;
+  for (size_t i = 0; i < extension_arr->count; i++)
+    arr_append(arr, extension_arr->elements[i]);
 }
 
 unsigned arr_index(Array *arr, unsigned index) {
