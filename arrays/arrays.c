@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <errno.h>
+#include "quicksort.h"
 
 typedef struct Array {
   unsigned capacity;  // How many elements can this array hold?
@@ -161,10 +162,75 @@ void arr_remove(Array *arr, char *element) {
   arr->count--;
 }
 
+/************************************
+ *
+ *   STRETCH ARRAY FUNCTIONS
+ *   Check out
+ *   https://www.programiz.com/python-programming/methods/list
+ *   for reference.
+ *
+ ************************************/
+
 void arr_clear(Array *arr) {
   for (size_t i = 0; i < arr->count; i++)
     free(arr->elements[i]);
   arr->count = 0;
+}
+
+Array *arr_copy(Array *arr) {
+  Array *cpy_arr = create_array(arr->capacity);
+  for (size_t i = 0; i < arr->count; i++)
+    arr_append(cpy_arr, strdup(arr->elements[i]));
+  return cpy_arr;
+}
+
+void arr_extend(Array *arr, Array *extension_arr) {
+  for (size_t i = 0; i < extension_arr->count; i++)
+    arr_append(arr, extension_arr->elements[i]);
+}
+
+int arr_index(Array *arr, char *element) {
+  int found = 0;
+  size_t i = 0;
+  while (!found && i < arr->count) {
+    if (strcmp(arr->elements[i], element) == 0) {
+      found = 1;
+      break;
+    }
+    i++;
+  }
+
+  return found ? (int) i : -1;
+}
+
+char *arr_pop(Array *arr, int index) {
+  if (index < 0) index = arr->count + index;
+
+  if (index >= (int) arr->count) {
+    perror("Index out of range");
+    return NULL;
+  }
+
+  char *tmp = arr->elements[index];
+  
+  for (size_t j = index+1; j < arr->count; j++)
+    arr->elements[j-1] = arr->elements[j];
+  arr->count--;
+
+  return tmp;
+}
+
+void arr_reverse(Array *arr) {
+  Array *cpy = arr_copy(arr);
+  size_t j = 0;
+  for (int i = cpy->count-1; i >= 0; i--) {
+    arr->elements[j++] = strdup(cpy->elements[i]);
+  }
+  destroy_array(cpy);
+}
+
+void arr_sort(Array *arr) {
+  quicksort(arr->elements, 0 , arr->count-1);
 }
 
 /*****
