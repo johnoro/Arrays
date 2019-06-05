@@ -106,10 +106,12 @@ char *stretch_array_tests() {
 
   /* POP */
   unsigned previous_count = arr->count;
-  arr_pop(arr, 2);
+  arr_pop(arr, 1);
   mu_assert(arr->count == --previous_count, "Count was not decremented correctly during pop.");
+  mu_assert(arr_pop(arr, 100) == NULL, "Should return null with non-existent indices.");
+  arr_append(arr, "VALUE-5");
   arr_pop(arr, -1);
-  mu_assert(arr->count == --previous_count, "Count was not decremented correctly during pop.");
+  mu_assert(arr->count == previous_count, "Count was not decremented correctly during pop.");
 
   /* REVERSE */
   arr_append(arr, "VALUE-5");

@@ -202,7 +202,22 @@ unsigned arr_index(Array *arr, char *element) {
 }
 
 char *arr_pop(Array *arr, int index) {
-  return NULL;
+  if (index < 0) index = -index;
+  if (index >= arr->count) {
+    perror("Index out of range");
+    return NULL;
+  }
+
+  size_t len = strlen(arr->elements[index]);
+  char tmp[len+1];
+  strcpy(tmp, arr->elements[index]);
+  free(arr->elements[index]);
+  
+  for (size_t j = index+1; j < arr->count; j++)
+    arr->elements[j-1] = arr->elements[j];
+  arr->count--;
+
+  return tmp;
 }
 
 void arr_reverse(Array *arr) {
