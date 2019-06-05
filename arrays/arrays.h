@@ -2,21 +2,39 @@
 #define arrays_h
 
 typedef struct Array {
-  int capacity;
-  int count;
+  unsigned capacity;
+  unsigned count;
   char **elements;
 } Array;
 
-Array *create_array (int capacity);
+Array *create_array(unsigned capacity);
 
 void destroy_array(Array *arr);
 
-char *arr_read(Array *arr, int index);
+char *arr_read(Array *arr, unsigned index);
 
 void arr_append(Array *arr, char *element);
 
-void arr_insert(Array *arr, char *element, int index);
+void arr_insert(Array *arr, char *element, unsigned index);
 
 void arr_remove(Array *arr, char *element);
+
+/* Stretch array declarations */
+
+void arr_clear(Array *arr);
+
+Array *arr_copy(Array *arr);
+
+void arr_extend(Array *arr);
+
+unsigned arr_index(Array *arr);
+
+char *arr_pop(Array *arr);
+
+void arr_reverse(Array *arr);
+
+void arr_sort(Array *arr);
+// void arr_sort(Array *arr, cmp_func, reverse?);
+
 
 #endif
