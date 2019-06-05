@@ -28,7 +28,7 @@ Array *arr_copy(Array *arr);
 
 void arr_extend(Array *arr, Array *extension_arr);
 
-unsigned arr_index(Array *arr, char *element);
+int arr_index(Array *arr, char *element);
 
 char *arr_pop(Array *arr, int index);
 

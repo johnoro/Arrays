@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <errno.h>
+#include "quicksort.h"
 
 typedef struct Array {
   unsigned capacity;  // How many elements can this array hold?
@@ -188,7 +189,7 @@ void arr_extend(Array *arr, Array *extension_arr) {
     arr_append(arr, extension_arr->elements[i]);
 }
 
-unsigned arr_index(Array *arr, char *element) {
+int arr_index(Array *arr, char *element) {
   int found = 0;
   size_t i = 0;
   while (!found && i < arr->count) {
@@ -198,12 +199,14 @@ unsigned arr_index(Array *arr, char *element) {
     }
     i++;
   }
-  return found ? i : -1;
+
+  return found ? (int) i : -1;
 }
 
 char *arr_pop(Array *arr, int index) {
   if (index < 0) index = arr->count + index;
-  if (index >= arr->count) {
+
+  if (index >= (int) arr->count) {
     perror("Index out of range");
     return NULL;
   }
@@ -227,7 +230,7 @@ void arr_reverse(Array *arr) {
 }
 
 void arr_sort(Array *arr) {
-  return;
+  quicksort(arr->elements, 0 , arr->count-1);
 }
 
 /*****
