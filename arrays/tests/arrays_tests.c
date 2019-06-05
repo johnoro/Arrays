@@ -109,8 +109,11 @@ char *stretch_array_tests() {
   arr_pop(arr, 1);
   mu_assert(arr->count == --previous_count, "Count was not decremented correctly during pop.");
   mu_assert(arr_pop(arr, 100) == NULL, "Should return null with non-existent indices.");
+
   arr_append(arr, "VALUE-5");
-  arr_pop(arr, -1);
+  char *tmp = arr_pop(arr, -1);
+  mu_assert(strcmp(tmp, "VALUE-5") == 0, "Negative indices should work if in range (like in Python).");
+  free(tmp);
   mu_assert(arr->count == previous_count, "Count was not decremented correctly during pop.");
 
   /* REVERSE */

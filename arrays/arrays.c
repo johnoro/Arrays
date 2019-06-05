@@ -179,7 +179,7 @@ void arr_clear(Array *arr) {
 Array *arr_copy(Array *arr) {
   Array *cpy_arr = create_array(arr->capacity);
   for (size_t i = 0; i < arr->count; i++)
-    arr_append(cpy_arr, arr->elements[i]);
+    arr_append(cpy_arr, strdup(arr->elements[i]));
   return cpy_arr;
 }
 
@@ -202,16 +202,13 @@ unsigned arr_index(Array *arr, char *element) {
 }
 
 char *arr_pop(Array *arr, int index) {
-  if (index < 0) index = -index;
+  if (index < 0) index = arr->count + index;
   if (index >= arr->count) {
     perror("Index out of range");
     return NULL;
   }
 
-  size_t len = strlen(arr->elements[index]);
-  char tmp[len+1];
-  strcpy(tmp, arr->elements[index]);
-  free(arr->elements[index]);
+  char *tmp = arr->elements[index];
   
   for (size_t j = index+1; j < arr->count; j++)
     arr->elements[j-1] = arr->elements[j];
@@ -221,7 +218,12 @@ char *arr_pop(Array *arr, int index) {
 }
 
 void arr_reverse(Array *arr) {
-  return;
+  Array *cpy = arr_copy(arr);
+  size_t j = 0;
+  for (int i = cpy->count-1; i >= 0; i--) {
+    arr->elements[j++] = strdup(cpy->elements[i]);
+  }
+  destroy_array(cpy);
 }
 
 void arr_sort(Array *arr) {
